@@ -1,7 +1,7 @@
-extends Node2D
+extends Node
 
 export (PackedScene) var Mob
-var score
+var score = 0
 
 
 func _ready():
@@ -12,12 +12,13 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
-	$DeathSound.play()
 	$Music.stop()
+	$DeathSound.play()
 
 
 func new_game():
 	score = 0
+	get_tree().call_group("mobs", "queue_free")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
@@ -36,12 +37,12 @@ func _on_ScoreTimer_timeout():
 
 
 func _on_MobTimer_timeout():
-	$MobPath/MobSpawnLocation.offset = randi()
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.offset = randi()
 	var mob = Mob.instance()
 	add_child(mob)
-	var direction = $MobPath/MobSpawnLocation.rotation + PI / 2
-	mob.position = $MobPath/MobSpawnLocation.position
+	mob.position = mob_spawn_location.position
+	var direction = mob_spawn_location.rotation + PI / 2
 	direction += rand_range(-PI / 4, PI / 4)
 	mob.rotation = direction
 	mob.linear_velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0).rotated(direction)
-	$HUD.connect("start_game", mob, "_on_start_game")
