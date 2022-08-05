@@ -1,18 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://font/Chewy-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 64
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="InputEventAction" id=4]
@@ -30,20 +22,24 @@ anchor_right = 0.5
 margin_left = -22.5
 margin_right = 22.5
 margin_bottom = 78.0
+grow_horizontal = 2
 custom_fonts/font = SubResource( 1 )
 text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+align = 1
 
 [node name="MessageLabel" type="Label" parent="."]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -79.5
-margin_bottom = 79.5
-custom_fonts/font = SubResource( 2 )
-text = "Dodge the Creeps!"
+margin_left = -240.0
+margin_top = -127.5
+margin_right = 240.0
+margin_bottom = 127.5
+custom_fonts/font = SubResource( 1 )
+text = "Dodge
+the
+Creeps!"
 align = 1
 autowrap = true
 __meta__ = {
@@ -58,12 +54,9 @@ anchor_bottom = 0.9
 margin_left = -90.0
 margin_top = -84.0
 margin_right = 90.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 shortcut = SubResource( 5 )
 text = "Start"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
