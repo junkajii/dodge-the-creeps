@@ -41,18 +41,13 @@ func _process(delta):
 		$AnimatedSprite.flip_v = direction.y > 0
 
 
-func start(pos):
-	position = pos
+func start(new_position):
+	position = new_position
 	show()
-#	$CollisionShape2D.disabled = false
-	var shape =  CapsuleShape2D.new()
-	shape.radius = 27
-	shape.height = 12
-	$CollisionShape2D.shape = shape
+	$CollisionShape2D.disabled = false
 
 
-func _on_Player_body_entered(body):
-#	$CollisionShape2D.set_deferred("disable", true)
-	$CollisionShape2D.shape = null
+func _on_Player_body_entered(_body):
 	hide()
+	$CollisionShape2D.set_deferred("disabled", true)
 	emit_signal("hit")
